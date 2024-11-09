@@ -50,6 +50,8 @@ jobs:
           else
             npm run test --BROWSER=${{ github.event.inputs.browser }}
           fi
+              |
+        shell: bash
         continue-on-error: false
       - name: Generate Report
         if: ${{ failure() || success() }}
