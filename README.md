@@ -1,4 +1,4 @@
-# This Is My Sample Project of Web Automation Testing Using Cypress and Cucumber
+# This Is My Sample Project of Web Automation Testing Using Playwright and Cucumber
 
 ## Project Information
 For this project, i use:
