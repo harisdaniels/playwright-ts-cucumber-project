@@ -33,9 +33,9 @@ jobs:
         with:
           node-version: 18
       - name: Install Dependencies
-        run:  | 
-          npx playwright install --with-deps
-          npm ci
+        run:  npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Run Web Automation
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then
