@@ -1,0 +1,53 @@
+name: Playwright Tests
+on:
+  # push:
+  #   branches: [ main, master ]
+  # pull_request:
+  #   branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Select where to run'
+        required: true
+        default: 'github'
+        type: choice
+        options:
+          - github
+      tags:
+        description: 'Enter cucumber tags'
+        required: false
+        type: string
+      artifacts:
+        description: 'Artifact reporting'
+        required: false
+        type: boolean
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run:  npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Web Automation
+        run: |
+          if [ "${{ github.event.inputs.tags }}" ]; then
+            npm run test --tags='"${{ github.event.inputs.tags }}"'
+          else
+            npm run test
+          fi
+        continue-on-error: false
+      - name: Generate Report
+        if: ${{ failure() || success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Report
+          path: reports/
+          retention-days: 2
