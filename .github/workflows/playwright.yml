@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
         run:  | 
           npx playwright install --with-deps
-          npm install
+          npm ci
       - name: Run Web Automation
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then

@@ -72,7 +72,6 @@ After(async function({pickle, result}) {
 });
 
 AfterAll(async function() {
-	fixture.logger.close();
 	await browser.close();
 });
 
