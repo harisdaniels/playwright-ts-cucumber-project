@@ -149,7 +149,7 @@ Before start development and running the test you need to install packages that 
   ```
 
 ## Run Test
-You can run your test by simply type npm run test command in your terminal, then press ENTER on your keyboard. And, the Automation Testing will run.
+You can run your test by simply type `npm run test` command in your terminal, then press ENTER on your keyboard. And, the Automation Testing will run.
 
 ## Run Test through Github Actions
 - Go to `Actions` tab on the top of Github page
