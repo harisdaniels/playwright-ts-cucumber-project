@@ -39,7 +39,7 @@ jobs:
       - name: Run Web Automation
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then
-            npm run test --tags='"${{ github.event.inputs.tags }}"'
+            npm run test --tags="${{ github.event.inputs.tags }}"
           else
             npm run test
           fi
