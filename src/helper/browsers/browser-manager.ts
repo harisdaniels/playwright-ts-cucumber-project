@@ -5,7 +5,7 @@ const options: LaunchOptions = {
 }
 export const invokeBrowser = (): Promise<Browser> => {
 
-	const browserType: string = process.env.BROWSER;
+	const browserType: string = process.env.npm_config_BROWSER || "chrome";
 	switch (browserType) {
 		case "chrome":
 			console.log("Browser chrome will launch");
