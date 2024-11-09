@@ -44,14 +44,13 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Web Automation
+        shell: bash
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then
             npm run test --tags="${{ github.event.inputs.tags }}" --BROWSER=${{ github.event.inputs.browser }}
           else
             npm run test --BROWSER=${{ github.event.inputs.browser }}
           fi
-              |
-        shell: bash
         continue-on-error: false
       - name: Generate Report
         if: ${{ failure() || success() }}
