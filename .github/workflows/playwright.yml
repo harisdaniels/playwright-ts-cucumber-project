@@ -13,6 +13,13 @@ on:
         type: choice
         options:
           - github
+      browser:
+        description: 'Select browser'
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - webkit
       tags:
         description: 'Enter cucumber tags'
         required: false
@@ -24,7 +31,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,11 +44,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Web Automation
+        shell: bash
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then
-            npm run test --tags='"${{ github.event.inputs.tags }}"'
+            npm run test --tags="${{ github.event.inputs.tags }}" --BROWSER=${{ github.event.inputs.browser }}
           else
-            npm run test
+            npm run test --BROWSER=${{ github.event.inputs.browser }}
           fi
         continue-on-error: false
       - name: Generate Report
