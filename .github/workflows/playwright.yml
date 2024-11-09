@@ -13,6 +13,13 @@ on:
         type: choice
         options:
           - github
+      browser:
+        description: 'Select browser'
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - webkit
       tags:
         description: 'Enter cucumber tags'
         required: false
@@ -39,9 +46,9 @@ jobs:
       - name: Run Web Automation
         run: |
           if [ "${{ github.event.inputs.tags }}" ]; then
-            npm run test --tags="${{ github.event.inputs.tags }}"
+            npm run test --tags="${{ github.event.inputs.tags }}" --BROWSER="${{ github.event.inputs.browser }}"
           else
-            npm run test
+            npm run test --BROWSER="${{ github.event.inputs.browser }}"
           fi
         continue-on-error: false
       - name: Generate Report
