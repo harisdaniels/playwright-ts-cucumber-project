@@ -31,7 +31,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,12 +44,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Web Automation
-        run: |
-          if [ "${{ github.event.inputs.tags }}" ]; then
-            npm run test --tags="${{ github.event.inputs.tags }}"
-          else
-            npm run test
-          fi
+        run: npm run test --BROWSER=${{ github.event.inputs.browser }}
         continue-on-error: false
       - name: Generate Report
         if: ${{ failure() || success() }}
